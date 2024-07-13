@@ -24,6 +24,10 @@ const server = http.createServer((req, res) => {
   const pathname = parsedUrl.pathname;
   const filePath = path.join(__dirname, "data", "products.json");
 
+  if (pathname === "/") {
+    console.log("Hello");
+  }
+
   if (pathname === "/api/products" && req.method === "GET") {
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
