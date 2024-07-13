@@ -5,7 +5,7 @@ const ProductList = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch("https://full-stack-react-app-server.vercel.app/api/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
