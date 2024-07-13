@@ -22,13 +22,25 @@ const server = http.createServer((req, res) => {
 
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
-  const filePath = path.join(__dirname, "data", "products.json");
 
+  // Serve static files for the root path
   if (pathname === "/") {
-    console.log("Hello");
+    const indexPath = path.join(__dirname, "index.html");
+    fs.readFile(indexPath, "utf8", (err, data) => {
+      if (err) {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.end("Internal Server Error");
+        return;
+      }
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(data);
+    });
+    return;
   }
 
+  // Handle API requests
   if (pathname === "/api/products" && req.method === "GET") {
+    const filePath = path.join(__dirname, "data", "products.json");
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
         res.writeHead(500, { "Content-Type": "application/json" });
@@ -40,7 +52,7 @@ const server = http.createServer((req, res) => {
     });
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ Error: "Not Found" }));
+    res.end(JSON.stringify({ error: "Not Found" }));
   }
 });
 
