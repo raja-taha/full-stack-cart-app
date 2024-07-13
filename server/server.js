@@ -9,9 +9,12 @@ const server = http.createServer((req, res) => {
   console.log(req.url, req.method);
 
   // Set CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://full-stack-cart-app.vercel.app"
+  );
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   // Handle preflight requests
   if (req.method === "OPTIONS") {
