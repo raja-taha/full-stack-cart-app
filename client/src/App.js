@@ -58,7 +58,7 @@ function App() {
       {isModalOpen && (
         <ConfirmationModal
           cartItems={cartItems}
-          onConfirm={handleCloseModal}
+          onConfirm={handleConfirmModal}
           onClose={handleCloseModal}
         />
       )}
